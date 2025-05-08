@@ -36,23 +36,26 @@ typedef address1 ListOfNode;
 //kepake
 /**** Primitif *****/
 /* Selektor */
+//udah
 infotype GetAkar (BinTree P);
 /* Mengirimkan informasi yang tersimpan di akar dari pohon Biner yg tdk kosong*/
 BinTree GetLeft (BinTree P);
 /* Mengirimkan anak kiri pohon biner P yang TIDAK kosong */
 BinTree GetRight (BinTree P);
 /* Mengirimkan anak kanan pohon biner P yang TIDAK kosong */
-address Alokasi (infotype X);
-/* Mengirimkan address hasil alokasi sebuah elemen */
-/* Jika Alokasi berhasil, maka address != Nil dan Info (P) = X */
-void MakeTree (infotype Akar, BinTree L, BinTree R, BinTree *P);
-/* IS : BinTree Sembarang */
-/* FS : Menghasilkan sebuah BinTree */
-/* Menghasilkan sebuah pohon biner dari A, L dan R, jika alokasi berhasil */
-/* Menghasilkan pohon kosong (Nil) jika alokasi gagal */
 boolean IsEmpty (BinTree P);
 /* Mengirimkan true jika BinTree KOSONG */
 /***** Traversal *****/
+address Alokasi (infotype X);
+/* Mengirimkan address hasil alokasi sebuah elemen */
+/* Jika Alokasi berhasil, maka address != Nil dan Info (P) = X */
+void DeAlokasi (address P);
+/* IS : P terdefinisi */
+/* FS : P dikembalikan ke sistem */
+/* Melakukan dealokasi / pengembalian address P ke system */
+
+
+//nashwa
 void PreOrder (BinTree P); //rekursif
 /* Traversal PreOrder menggunakan Rekursif */
 /* IS : P terdefinisi */
@@ -68,10 +71,26 @@ void PostOrder (BinTree P); //rekursif
 void PrintTree (BinTree P, int h);
 /* IS : P terdefinisi, h adalah jarak indentasi */
 /* FS : Semua simpul P sudah ditulis dengan indentasi */
+
+//nazwa
 /***** Search *****/
 boolean Search (BinTree P, infotype X);
 /* Mengirimkan true jika ada node dari P yang bernilai X */
+void MakeTree (infotype Akar, BinTree L, BinTree R, BinTree *P);
+/* IS : BinTree Sembarang */
+/* FS : Menghasilkan sebuah BinTree */
+/* Menghasilkan sebuah pohon biner dari A, L dan R, jika alokasi berhasil */
+/* Menghasilkan pohon kosong (Nil) jika alokasi gagal */
+void AddDaunTerkiri (BinTree *P, infotype X);
+/* Menambah elemen Tree di cabang Kiri dengan alokasi baru */
+/* IS : P boleh kosong */
+/* FS : P bertambah simpulnya, dengan X sebagai simpul daun terkiri */
+void AddDaun (BinTree *P, infotype X, infotype Y, boolean Kiri);
+/* IS : P tidak kosong, X adalah salah satu daun Pohon Biner P */
+/* FS : P bertambah simpulnya, dengan Y sebagai anak kiri X (jika Kiri) */
+/*      atau sebagai anak Kanan X (jika NOT Kiri) */
 
+//kasih
 //orang 2
 /***** Fungsi Lain *****/
 int nbElmt (BinTree P);
@@ -85,22 +104,11 @@ int Depth (BinTree P);
 int Max (infotype Data1, infotype Data2);
 /* Mengirimkan Nilai terbesar dari dua data */
 /***** Operasi Lain *****/
-void AddDaunTerkiri (BinTree *P, infotype X);
-/* Menambah elemen Tree di cabang Kiri dengan alokasi baru */
-/* IS : P boleh kosong */
-/* FS : P bertambah simpulnya, dengan X sebagai simpul daun terkiri */
-void AddDaun (BinTree *P, infotype X, infotype Y, boolean Kiri);
-/* IS : P tidak kosong, X adalah salah satu daun Pohon Biner P */
-/* FS : P bertambah simpulnya, dengan Y sebagai anak kiri X (jika Kiri) */
-/*      atau sebagai anak Kanan X (jika NOT Kiri) */
 void DestroyTree (BinTree *P);
 /* Menghapus seluruh elemen Tree secara Rekursif */
 /* IS : P terdefinisi */
 /* FS : Semua simpul P sudah dihapus secara PostOrder :  Kiri, Kanan, Akar */
-void DeAlokasi (address P);
-/* IS : P terdefinisi */
-/* FS : P dikembalikan ke sistem */
-/* Melakukan dealokasi / pengembalian address P ke system */
+
 
 #endif
 
