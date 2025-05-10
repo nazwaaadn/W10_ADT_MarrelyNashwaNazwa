@@ -51,44 +51,49 @@ void MakeTree (infotype Akar, BinTree L, BinTree R, BinTree *P)
     }
 }
 
-void AddDaun (BinTree *P, infotype X, infotype Y, boolean Kiri)
-{
-    
-    if (IsEmpty(*P))
-    {
-        MakeTree(X, Nil, Nil, P);
-    } 
-    else{
-        if (Info(*P) == Y)
-        {
-            address temp = Alokasi(X);
-            if (temp != Nil)
-            {
-                if (Kiri && Left(*P) == Nil)
-                {
-                    Left(*P) = temp;
-                }
-                if (!Kiri && Right(*P) == Nil)
-                {
-                    Right(*P) = temp;
-                }
-                else if (Kiri)
-                {
-                    Left(*P) = temp;
-                }
-                else
-                {
-                    Right(*P) = temp;
-                }
-            }
-        }
-        else
-        {
-            AddDaun(&Left(*P), X, Y, Kiri);
-            AddDaun(&Right(*P), X, Y, Kiri);
-        }
-    } 
+address SearchAddress(BinTree P, infotype X) {
+    if (P == Nil) return Nil;
+    if (Info(P) == X) return P;
+
+    address found = SearchAddress(Left(P), X);
+    if (found != Nil) return found;
+
+    return SearchAddress(Right(P), X);
 }
+
+
+void AddDaun(BinTree *P, infotype X, infotype Y, boolean Kiri) {
+    if (*P == Nil) {
+        // Jika tree masih kosong, buat node pertama sebagai root
+        *P = Alokasi(Y);  // Buat node parent dulu
+        if (*P == Nil) {
+            printf("Alokasi gagal.\n");
+            return;
+        }
+    }
+
+    address parent = SearchAddress(*P, Y);
+    if (parent != Nil) {
+        address newNode = Alokasi(X);
+        if (newNode == Nil) {
+            printf("Alokasi gagal.\n");
+            return;
+        }
+
+        if (Kiri && Left(parent) == Nil) {
+            Left(parent) = newNode;
+        } else if (!Kiri && Right(parent) == Nil) {
+            Right(parent) = newNode;
+        } else {
+            printf("Posisi anak sudah terisi!\n");
+            DeAlokasi(newNode);
+        }
+    } else {
+        printf("Parent '%c' tidak ditemukan!\n", Y);
+    }
+}
+
+
 
 boolean findMorseCode(BinTree root, char target, char *buffer, int depth) {
     if (root == NULL) return false;
@@ -184,9 +189,6 @@ boolean Search (BinTree P, infotype X)
     return false;
 }
 
-
-void DeAlokasi (address P)
-{
 void DeAlokasi(address P) {
     free(P);
 }
@@ -263,18 +265,58 @@ void PostOrder(BinTree P) {
     printf("\n");
 }
 
-void PrintTree(BinTree P, int h) {
-    printf("Binary Tree Structure:\n\n");
-
-    for (int i = 0; i < jml_maks; i++) {
-        if (P[i].info != '\0') {  
-            printf("Info Node: [%c]\n", P[i].info);
-            
-            // Print left child
-            printf("Left Son: [%c]\n", (P[i].left != Nil) ? P[i].left->info : '-');
-            
-            // Print right child
-            printf("Right Son: [%c]\n", (P[i].right != Nil) ? P[i].right->info : '-');
-        }
+void PrintTree(BinTree P) {
+    if (P != Nil) {
+        printf("Info Node     : %c\n", Info(P));
+        printf("Left Son      : %c\n", (Left(P) != Nil) ? Info(Left(P)) : '-');
+        printf("Right Son     : %c\n\n", (Right(P) != Nil) ? Info(Right(P)) : '-');
+        
+        // Panggil fungsi PrintTree pada anak kiri dan kanan
+        PrintTree(Left(P));
+        PrintTree(Right(P));
     }
 }
+
+
+
+
+int nbElmt (BinTree P){
+    if (P == Nil) {
+        return 0;
+    } else {
+        return 1 + nbElmt(Left(P)) + nbElmt(Right(P));
+    }
+}
+
+int nbDaun (BinTree P){
+    if (P == Nil) {
+        return 0;
+    } else if (Left(P) == Nil && Right(P) == Nil) {
+        return 1;
+    } else {
+        return nbDaun(Left(P)) + nbDaun(Right(P));
+    }
+}
+
+int Depth (BinTree P){
+    if (P == Nil) {
+        return 0;
+    } else {
+        int leftDepth = Depth(Left(P));
+        int rightDepth = Depth(Right(P));
+        return 1 + Max(leftDepth, rightDepth);
+    }
+}
+int Max (infotype Data1, infotype Data2){
+    return (Data1 > Data2) ? Data1 : Data2;
+}
+void DestroyTree (BinTree *P){
+    if (*P != Nil) {
+        DestroyTree(&Left(*P));
+        DestroyTree(&Right(*P));
+        DeAlokasi(*P);
+        *P = Nil;
+    }
+}
+
+

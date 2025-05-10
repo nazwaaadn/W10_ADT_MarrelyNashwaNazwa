@@ -70,7 +70,7 @@ void PostOrder (BinTree P); //rekursif
 /* Traversal PostOrder menggunakan Rekursif */
 /* IS : P terdefinisi */
 /* FS : Semua simpul P sudah diproses secara PostOrder :  Kiri, Kanan, Akar */
-void PrintTree (BinTree P, int h);
+void PrintTree (BinTree P);
 /* IS : P terdefinisi, h adalah jarak indentasi */
 /* FS : Semua simpul P sudah ditulis dengan indentasi */
 
