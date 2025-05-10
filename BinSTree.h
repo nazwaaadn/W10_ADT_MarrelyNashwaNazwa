@@ -9,6 +9,7 @@
 #include "boolean.h"
 #define true 1
 #define false 0
+#define jml_maks 100
 #define boolean unsigned char
 #define Nil NULL
 #define Info(T) (T)->info
@@ -22,6 +23,7 @@ typedef struct tElmtTree *address;
 typedef struct tElmtTree {
 	infotype info;
 	address left, right;
+    address parent;
 } Node;	
 
 typedef struct tElmtList *address1;
@@ -109,4 +111,3 @@ void DestroyTree (BinTree *P);
 
 
 #endif
-
