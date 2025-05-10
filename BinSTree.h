@@ -17,7 +17,7 @@
 #define InfoList(L) (L)->info
 #define Next(L) (L)->next
 
-typedef int infotype;
+typedef char infotype;
 typedef struct tElmtTree *address;
 typedef struct tElmtTree {
 	infotype info;
@@ -81,14 +81,12 @@ void MakeTree (infotype Akar, BinTree L, BinTree R, BinTree *P);
 /* FS : Menghasilkan sebuah BinTree */
 /* Menghasilkan sebuah pohon biner dari A, L dan R, jika alokasi berhasil */
 /* Menghasilkan pohon kosong (Nil) jika alokasi gagal */
-void AddDaunTerkiri (BinTree *P, infotype X);
-/* Menambah elemen Tree di cabang Kiri dengan alokasi baru */
-/* IS : P boleh kosong */
-/* FS : P bertambah simpulnya, dengan X sebagai simpul daun terkiri */
 void AddDaun (BinTree *P, infotype X, infotype Y, boolean Kiri);
 /* IS : P tidak kosong, X adalah salah satu daun Pohon Biner P */
 /* FS : P bertambah simpulnya, dengan Y sebagai anak kiri X (jika Kiri) */
 /*      atau sebagai anak Kanan X (jika NOT Kiri) */
+void StringToMorse (BinTree P, char *str, char *morse);
+void MorseToString (BinTree P, char *str, char *morse);
 
 //kasih
 //orang 2
