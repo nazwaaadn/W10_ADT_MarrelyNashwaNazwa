@@ -26,9 +26,9 @@ int main() {
         printf("8. Jumlah Daun/Leaf\n");
         printf("9. Kedalaman Tree\n");
         printf("10. Membandingkan 2 node Tree\n");
+        printf("11. String to Morse\n");
         printf("12. Morse to String\n");
-        printf("13. String to Morse\n");
-        printf("11. Exit\n");
+        printf("13. Exit\n");
         printf("Pilih Menu: ");
         scanf(" %d", &pilihan);
 
@@ -114,7 +114,7 @@ int main() {
                     printf("Node %c sama dengan node %c\n", cari1, cari2);
                 break;
 
-            case 12:
+            case 11:
                 printf("Konversi string ke Morse.\n");
                 while (getchar() != '\n'); // flush newline sisa
                 printf("Masukkan string (huruf kapital tanpa spasi): ");
@@ -126,7 +126,7 @@ int main() {
                 printf("Morse: %s\n", output);
                 break;
 
-            case 13:
+            case 12:
                 printf("Masukkan kode Morse (pisahkan tiap huruf dengan spasi): ");
                 while (getchar() != '\n'); // flush newline sisa
                 fgets(input, sizeof(input), stdin);
@@ -137,7 +137,7 @@ int main() {
                 printf("Teks: %s\n", output);
                 break;
 
-            case 11:
+            case 13:
                 printf("Keluar dari program.\n");
                 break;
 

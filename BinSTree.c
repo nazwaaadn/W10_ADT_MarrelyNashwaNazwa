@@ -304,9 +304,10 @@ int Depth (BinTree P){
     } else {
         int leftDepth = Depth(Left(P));
         int rightDepth = Depth(Right(P));
-        return 1 + Max(leftDepth, rightDepth);
+        return (1 + Max(leftDepth, rightDepth));
     }
 }
+
 int Max (infotype Data1, infotype Data2){
     return (Data1 > Data2) ? Data1 : Data2;
 }
