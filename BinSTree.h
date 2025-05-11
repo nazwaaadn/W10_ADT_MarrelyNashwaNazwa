@@ -70,6 +70,9 @@ void PostOrder (BinTree P); //rekursif
 /* Traversal PostOrder menggunakan Rekursif */
 /* IS : P terdefinisi */
 /* FS : Semua simpul P sudah diproses secara PostOrder :  Kiri, Kanan, Akar */
+// Fungsi untuk mencetak node pada level tertentu
+void LevelOrder(BinTree P);
+void PrintLevel(BinTree P, int level);
 void PrintTree (BinTree P);
 /* IS : P terdefinisi, h adalah jarak indentasi */
 /* FS : Semua simpul P sudah ditulis dengan indentasi */
