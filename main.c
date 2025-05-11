@@ -80,7 +80,9 @@ int main() {
                 break;
 
             case 6:
-                printf("Transversal Level Order: (belum diimplementasi)\n");
+                printf("Transversal Level Order: ");
+                LevelOrder(T);
+                printf("\n");
                 break;
 
             case 7:
@@ -144,7 +146,7 @@ int main() {
             default:
                 printf("Pilihan tidak valid!\n");
         }
-    } while (pilihan != 11);
+    } while (pilihan != 13);
 
     return 0;
 }
