@@ -9,6 +9,7 @@
 #include "boolean.h"
 #define true 1
 #define false 0
+#define jml_maks 100
 #define boolean unsigned char
 #define Nil NULL
 #define Info(T) (T)->info
@@ -17,11 +18,12 @@
 #define InfoList(L) (L)->info
 #define Next(L) (L)->next
 
-typedef int infotype;
+typedef char infotype;
 typedef struct tElmtTree *address;
 typedef struct tElmtTree {
 	infotype info;
 	address left, right;
+    address parent;
 } Node;	
 
 typedef struct tElmtList *address1;
@@ -68,7 +70,10 @@ void PostOrder (BinTree P); //rekursif
 /* Traversal PostOrder menggunakan Rekursif */
 /* IS : P terdefinisi */
 /* FS : Semua simpul P sudah diproses secara PostOrder :  Kiri, Kanan, Akar */
-void PrintTree (BinTree P, int h);
+// Fungsi untuk mencetak node pada level tertentu
+void LevelOrder(BinTree P);
+void PrintLevel(BinTree P, int level);
+void PrintTree (BinTree P);
 /* IS : P terdefinisi, h adalah jarak indentasi */
 /* FS : Semua simpul P sudah ditulis dengan indentasi */
 
@@ -81,14 +86,12 @@ void MakeTree (infotype Akar, BinTree L, BinTree R, BinTree *P);
 /* FS : Menghasilkan sebuah BinTree */
 /* Menghasilkan sebuah pohon biner dari A, L dan R, jika alokasi berhasil */
 /* Menghasilkan pohon kosong (Nil) jika alokasi gagal */
-void AddDaunTerkiri (BinTree *P, infotype X);
-/* Menambah elemen Tree di cabang Kiri dengan alokasi baru */
-/* IS : P boleh kosong */
-/* FS : P bertambah simpulnya, dengan X sebagai simpul daun terkiri */
 void AddDaun (BinTree *P, infotype X, infotype Y, boolean Kiri);
 /* IS : P tidak kosong, X adalah salah satu daun Pohon Biner P */
 /* FS : P bertambah simpulnya, dengan Y sebagai anak kiri X (jika Kiri) */
 /*      atau sebagai anak Kanan X (jika NOT Kiri) */
+void StringToMorse (BinTree P, char *str, char *morse);
+void MorseToString (BinTree P, char *str, char *morse);
 
 //kasih
 //orang 2
@@ -146,4 +149,3 @@ if (*P != Nil) {
 
 
 #endif
-
