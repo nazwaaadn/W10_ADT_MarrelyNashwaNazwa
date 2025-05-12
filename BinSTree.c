@@ -118,59 +118,58 @@ void StringToMorse (BinTree P, char *str, char *morse)
     if (!IsEmpty(P))
     {
         for (i = 0; i < strlen(str); i++) {
-            if (str[i] == ' ') {
-                morse[i] = ' ';
+            char buffer[100];
+            if (findMorseCode(P, str[i], buffer, 0)) {
+                strcat(morse, buffer);
+                strcat(morse, " ");
             } else {
-                char buffer[100];
-                if (findMorseCode(P, str[i], buffer, 0)) {
-                    strcat(morse, buffer);
-                    strcat(morse, " "); 
-                } else {
-                    strcat(morse, "? "); 
-                }
+                strcat(morse, "? ");
             }
         }
     }
     
 }
 
-boolean findString(BinTree root, char *target, char *buffer, int depth) {
+boolean findString(BinTree root, const char *target, char *buffer, int depth) {
     if (root == NULL) return false;
 
     if (depth == strlen(target)) {
-        buffer[0] = Info(root); // Simpan hasilnya ke buffer[0]
-        buffer[1] = '\0'; // akhiri string
+        buffer[0] = Info(root);
+        buffer[1] = '\0';
         return true;
     }
 
-    if (target[depth] == '.')
-    {
+    if (target[depth] == '.') {
         return findString(root->left, target, buffer, depth + 1);
-    } else if (target[depth] == '-') 
-    {
+    } else if (target[depth] == '-') {
         return findString(root->right, target, buffer, depth + 1);
-    } else if (target[depth] == '\0') 
-    {
-        buffer[depth] = '\0';
-        return true;
     }
+
+    // Jika karakter tidak valid (bukan '.' atau '-')
     return false;
-    
 }
 
+
 void MorseToString(BinTree P, char *str, char *morse) {
-    char *token = strtok(morse, " ");  
+    char *token = strtok(morse, " ");
     char buffer[10];
 
+    str[0] = '\0'; // pastikan string output kosong di awal
+
     while (token != NULL) {
-        if (findString(P, token, buffer, 0)) {
+        if (strcmp(token, "") == 0) {
+            // Jika ada dua spasi berturut-turut (tanda pemisah kata), tambahkan spasi
+            strcat(str, " ");
+        } else if (findString(P, token, buffer, 0)) {
             strcat(str, buffer);
         } else {
-            strcat(str, "?");
+            strcat(str, "?"); // jika kode tidak dikenali
         }
+
         token = strtok(NULL, " ");
     }
 }
+
 
 
 boolean Search (BinTree P, infotype X)
@@ -194,75 +193,46 @@ void DeAlokasi(address P) {
 }
 
 void PreOrder(BinTree P) {
-    BinTree current = P; 
-    boolean resmi = true;
-
-    if (current == Nil) return;
-
-    printf("%c ", Info(current));  
-    while (current != Nil) {
-        if (Left(current) != Nil && resmi) {
-            current = Left(current);
-            printf("%c ", Info(current));
-        } else if (Right(current) != Nil) {
-            current = Right(current);
-            printf("%c ", Info(current));
-            resmi = true;
-        } else {
-            current = current->parent;
-            resmi = false;
-        }
+    if (P != Nil) {
+        printf("%c ", Info(P));   
+        PreOrder(Left(P));         
+        PreOrder(Right(P));       
     }
-    printf("\n");
 }
 
 void InOrder(BinTree P) {
-    BinTree current = P;
-    boolean resmi = true;
-
-    while (current != Nil) {
-        while (Left(current) != Nil && resmi) {
-            current = Left(current);
-        }
-        if (resmi) {
-            printf("%c ", Info(current));
-        }
-        if (Right(current) != Nil) {
-            current = Right(current);
-            resmi = true;
-        } else {
-            current = current->parent;
-            resmi = false;
-            if (current != Nil && Left(current) != Nil && !resmi) {
-                printf("%c ", Info(current));
-            }
-        }
+    if (P != Nil) {
+        InOrder(Left(P));         
+        printf("%c ", Info(P));    
+        InOrder(Right(P));            
     }
-    printf("\n");
 }
 
 void PostOrder(BinTree P) {
-    BinTree current = P;
-    boolean resmi = true;
-
-    while (current != Nil) {
-        while (Left(current) != Nil && resmi) {
-            current = Left(current);
-        }
-        if (Right(current) != Nil && resmi) {
-            current = Right(current);
-        } else {
-            printf("%c ", Info(current));
-            if (current != Nil) {
-                BinTree parent = current->parent;
-                if (parent != Nil && Left(parent) == current) {
-                    resmi = false;
-                }
-                current = parent;
-            }
-        }
+    if (P != Nil) {
+        PostOrder(Left(P));           
+        PostOrder(Right(P));          
+        printf("%c ", Info(P));       
     }
-    printf("\n");
+}
+
+void PrintLevel(BinTree P, int level) {
+    if (P == NULL) return;
+    if (level == 0) {
+        printf("%c ", Info(P));
+    } else {
+        PrintLevel(Left(P), level - 1);
+        PrintLevel(Right(P), level - 1);
+    }
+}
+
+void LevelOrder(BinTree P) {
+    if (P == NULL) return;
+
+    int h = Depth(P);
+    for (int i = 0; i < h; i++) { 
+        PrintLevel(P, i);
+    }
 }
 
 void PrintTree(BinTree P) {

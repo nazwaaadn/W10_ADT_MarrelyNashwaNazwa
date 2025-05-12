@@ -34,11 +34,12 @@ int main() {
 
         switch(pilihan) {
             case 1:
-                printf("Insert Node: \n");
                 printf("Masukkan info node yang ingin ditambahkan: ");
-                scanf(" %c", &X);
+                getchar(); // BACA DAN BUANG newline dari input sebelumnya
+                scanf("%c", &X);    
                 printf("Masukkan parent node: ");
-                scanf(" %c", &Y);
+                getchar();
+                scanf("%c", &Y);
                 printf("Masukkan posisi (L/R) : ");
                 scanf(" %c", &posisi);
                 
@@ -118,7 +119,7 @@ int main() {
             case 11:
                 printf("Konversi string ke Morse.\n");
                 while (getchar() != '\n'); // flush newline sisa
-                printf("Masukkan string (huruf kapital tanpa spasi): ");
+                printf("Masukkan string: ");
                 fgets(input, sizeof(input), stdin);
                 input[strcspn(input, "\n")] = 0;
 
