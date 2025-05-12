@@ -194,46 +194,75 @@ void DeAlokasi(address P) {
 }
 
 void PreOrder(BinTree P) {
-    if (P != Nil) {
-        printf("%c ", Info(P));   
-        PreOrder(Left(P));         
-        PreOrder(Right(P));       
+    BinTree current = P; 
+    boolean resmi = true;
+
+    if (current == Nil) return;
+
+    printf("%c ", Info(current));  
+    while (current != Nil) {
+        if (Left(current) != Nil && resmi) {
+            current = Left(current);
+            printf("%c ", Info(current));
+        } else if (Right(current) != Nil) {
+            current = Right(current);
+            printf("%c ", Info(current));
+            resmi = true;
+        } else {
+            current = current->parent;
+            resmi = false;
+        }
     }
+    printf("\n");
 }
 
 void InOrder(BinTree P) {
-    if (P != Nil) {
-        InOrder(Left(P));         
-        printf("%c ", Info(P));    
-        InOrder(Right(P));            
+    BinTree current = P;
+    boolean resmi = true;
+
+    while (current != Nil) {
+        while (Left(current) != Nil && resmi) {
+            current = Left(current);
+        }
+        if (resmi) {
+            printf("%c ", Info(current));
+        }
+        if (Right(current) != Nil) {
+            current = Right(current);
+            resmi = true;
+        } else {
+            current = current->parent;
+            resmi = false;
+            if (current != Nil && Left(current) != Nil && !resmi) {
+                printf("%c ", Info(current));
+            }
+        }
     }
+    printf("\n");
 }
 
 void PostOrder(BinTree P) {
-    if (P != Nil) {
-        PostOrder(Left(P));           
-        PostOrder(Right(P));          
-        printf("%c ", Info(P));       
-    }
-}
+    BinTree current = P;
+    boolean resmi = true;
 
-void PrintLevel(BinTree P, int level) {
-    if (P == NULL) return;
-    if (level == 0) {
-        printf("%c ", Info(P));
-    } else {
-        PrintLevel(Left(P), level - 1);
-        PrintLevel(Right(P), level - 1);
+    while (current != Nil) {
+        while (Left(current) != Nil && resmi) {
+            current = Left(current);
+        }
+        if (Right(current) != Nil && resmi) {
+            current = Right(current);
+        } else {
+            printf("%c ", Info(current));
+            if (current != Nil) {
+                BinTree parent = current->parent;
+                if (parent != Nil && Left(parent) == current) {
+                    resmi = false;
+                }
+                current = parent;
+            }
+        }
     }
-}
-
-void LevelOrder(BinTree P) {
-    if (P == NULL) return;
-
-    int h = Depth(P);
-    for (int i = 0; i < h; i++) { 
-        PrintLevel(P, i);
-    }
+    printf("\n");
 }
 
 void PrintTree(BinTree P) {
@@ -247,6 +276,9 @@ void PrintTree(BinTree P) {
         PrintTree(Right(P));
     }
 }
+
+
+
 
 int nbElmt (BinTree P){
     if (P == Nil) {

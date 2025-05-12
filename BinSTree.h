@@ -96,56 +96,21 @@ void MorseToString (BinTree P, char *str, char *morse);
 //kasih
 //orang 2
 /***** Fungsi Lain *****/
-int nbElmt (BinTree P){
+int nbElmt (BinTree P);
 /* Mengirimkan banyak elemen (node) pohon biner P */
-    if (P == Nil) {
-        return 0;
-    } else {
-        return 1 + nbElmt(Left(P)) + nbElmt(Right(P));
-    }
-}
-
-int nbDaun (BinTree P){
+int nbDaun (BinTree P);
 /* Mengirimkan banyak daun (node) pohon biner P */
-if (P == Nil) {
-	return 0;
-} else if (Left(P) == Nil && Right(P) == Nil) {
-	return 1;
-} else {
-	return nbDaun(Left(P)) + nbDaun(Right(P));
-}
-}
-
-int Depth (BinTree P){
+int Depth (BinTree P);
 /* Pohon Biner mungkin Kosong, mengirimkan 'depth' yaitu tinggi dari Pohon */
 /* Basis : Pohon Kosong, tingginya Nol */
 /* Rekurens : 1 + maksimal (Depth (Anak Kiri), Depth  (Anak Kanan)) */
-
-if (P == Nil) {
-	return 0;
-} else {
-	int leftDepth = Depth(Left(P));
-	int rightDepth = Depth(Right(P));
-	return 1 + Max(leftDepth, rightDepth);
-}
-}
-int Max (infotype Data1, infotype Data2){
+int Max (infotype Data1, infotype Data2);
 /* Mengirimkan Nilai terbesar dari dua data */
 /***** Operasi Lain *****/
-
-    return (Data1 > Data2) ? Data1 : Data2;
-}
-void DestroyTree (BinTree *P){
+void DestroyTree (BinTree *P);
 /* Menghapus seluruh elemen Tree secara Rekursif */
 /* IS : P terdefinisi */
 /* FS : Semua simpul P sudah dihapus secara PostOrder :  Kiri, Kanan, Akar */
-if (*P != Nil) {
-	DestroyTree(&Left(*P));
-	DestroyTree(&Right(*P));
-	DeAlokasi(*P);
-	*P = Nil;
-}
-}
 
 
 #endif
