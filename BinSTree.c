@@ -319,5 +319,3 @@ void DestroyTree (BinTree *P){
         *P = Nil;
     }
 }
-
-

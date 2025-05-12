@@ -112,5 +112,4 @@ void DestroyTree (BinTree *P);
 /* IS : P terdefinisi */
 /* FS : Semua simpul P sudah dihapus secara PostOrder :  Kiri, Kanan, Akar */
 
-
 #endif
