@@ -99,7 +99,7 @@ void MorseToString (BinTree P, char *str, char *morse);
 int nbElmt (BinTree P);
 /* Mengirimkan banyak elemen (node) pohon biner P */
 int nbDaun (BinTree P);
-/* Mengirimkan banyak daun (node) pohon biner P */
+/* Mengirimkan banyak daun (node) pohon biner P */ 
 int Depth (BinTree P);
 /* Pohon Biner mungkin Kosong mengirimkan 'depth' yaitu tinggi dari Pohon */
 /* Basis : Pohon Kosong, tingginya Nol */
@@ -111,6 +111,5 @@ void DestroyTree (BinTree *P);
 /* Menghapus seluruh elemen Tree secara Rekursif */
 /* IS : P terdefinisi */
 /* FS : Semua simpul P sudah dihapus secara PostOrder :  Kiri, Kanan, Akar */
-
 
 #endif
