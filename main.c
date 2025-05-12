@@ -54,8 +54,7 @@ int main() {
                     printf("Parent node '%c' tidak ditemukan.\n", Y);
                 }
                 break;
-
-
+                
             case 2:
                 printf("Print Tree:\n");
                 PrintTree(T);
