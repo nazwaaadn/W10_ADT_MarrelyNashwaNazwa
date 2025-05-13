@@ -18,6 +18,7 @@
 #define InfoList(L) (L)->info
 #define Next(L) (L)->next
 
+
 typedef char infotype;
 typedef struct tElmtTree *address;
 typedef struct tElmtTree {

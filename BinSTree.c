@@ -237,7 +237,14 @@ void LevelOrder(BinTree P) {
 
 void PrintTree(BinTree P) {
     if (P != Nil) {
-        printf("Info Node     : %c\n", Info(P));
+        if (Info(P) == '*')
+        {
+            printf("Info Node     : \n");
+        } else
+        {
+            printf("Info Node     : %c\n", Info(P));
+        }
+
         printf("Left Son      : %c\n", (Left(P) != Nil) ? Info(Left(P)) : '-');
         printf("Right Son     : %c\n\n", (Right(P) != Nil) ? Info(Right(P)) : '-');
         

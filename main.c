@@ -87,7 +87,8 @@ int main() {
 
             case 7:
                 printf("Masukkan info node yang dicari: ");
-                scanf(" %c", &cari1);
+                getchar();
+                scanf("%c", &cari1);
                 if (Search(T, cari1))
                     printf("Node '%c' ditemukan.\n", cari1);
                 else
@@ -105,9 +106,11 @@ int main() {
             case 10:
                 printf("Masukkan dua node:\n");
                 printf("Node 1: ");
-                scanf(" %c", &cari1);
+                getchar();
+                scanf("%c", &cari1);
                 printf("Node 2: ");
-                scanf(" %c", &cari2);
+                getchar();
+                scanf("%c", &cari2);
                 if (Max(cari1, cari2) == cari1)
                     printf("Node %c lebih besar dari node %c\n", cari1, cari2);
                 else if (Max(cari1, cari2) == cari2)
